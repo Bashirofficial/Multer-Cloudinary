@@ -11,13 +11,7 @@ const uploadDir = path.join(__dirname, "uploads");
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
 }
-app.use(
-  cors({
-    origin: "http://localhost:3000", // frontend origin
-    methods: ["GET", "POST"], // allowed HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"], // allowed headers
-  })
-);
+app.use(cors());
 app.use("/src/uploads", express.static("src/uploads"));
 app.use("/files", fileRouter);
 app.use("/", (req, res) => {

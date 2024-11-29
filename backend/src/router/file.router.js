@@ -16,17 +16,21 @@ fileRouter.post(
     upload(req, res, function (err) {
       if (err instanceof multer.MulterError) {
         if (err.code === UNEXPECTED_FILE_TYPE.code) {
-          return res.status(400).json({ error: { description: err.field } });
+          return res
+            .status(400)
+            .json({ error: { description: "Invalid file type" } });
         }
-      } else {
+        return res.status(400).json({ error: { description: err.message } });
+      }
+      if (err) {
         return res.status(500).json({ error: { description: err.message } });
       }
       next();
     });
   },
-  fileController,
+  isFilePresent,
   imageResize,
-  isFilePresent
+  fileController
 );
 
 module.exports = { fileRouter };

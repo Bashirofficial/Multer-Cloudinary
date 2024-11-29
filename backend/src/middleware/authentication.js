@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken");
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
 authenticateJWT = (req, res, next) => {
   const token = req.header("Authorization")?.split(" ")[1];
